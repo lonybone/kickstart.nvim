@@ -1,3 +1,14 @@
+--Custom Commands
+vim.api.nvim_create_user_command('Pg', 'cd C:/Users/Flo/OneDrive/Desktop/vim_playground | edit .', {
+  desc = 'Go to vim_playground and set CWD',
+})
+--Custom Keymaps
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v', 'o' }, 'l', 'h', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v', 'o' }, 'j', 'j', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v', 'o' }, 'k', 'k', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v', 'o' }, 'ö', 'l', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v', 'o' }, 'h', '', { noremap = true, silent = true })
 --[[
 
 =====================================================================
@@ -984,7 +995,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
