@@ -1,14 +1,18 @@
---Custom Commands
-vim.api.nvim_create_user_command('Pg', 'cd C:/Users/Flo/OneDrive/Desktop/vim_playground | edit .', {
-  desc = 'Go to vim_playground and set CWD',
-})
---Custom Keymaps
+--custom commands
+
+--custom keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'l', 'h', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'j', 'j', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'k', 'k', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'ö', 'l', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'h', '', { noremap = true, silent = true })
+--file formatting bcs windows sucks
+vim.opt.fileformats = 'unix,dos'
+vim.opt.fileformat = 'unix'
+--config stuff
+vim.opt.number = true
+vim.opt.relativenumber = true
 --[[
 
 =====================================================================
@@ -102,7 +106,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -259,6 +263,7 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  { 'nvim-tree/nvim-web-devicons', opts = {} }, --Custom
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -846,8 +851,32 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
-
+        ['<C-h>'] = { 'select_next', 'fallback_to_mappings' },
+        ['<C-n>'] = { 'select_prev', 'fallback_to_mappings' },
+        ['<Tab>'] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+        ['<CR>'] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+        ['<C-Space>'] = { 'show' },
+        ['<C-e>'] = { 'hide' },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
