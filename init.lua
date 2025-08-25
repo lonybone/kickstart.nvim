@@ -1,5 +1,8 @@
 --custom commands
-
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.h',
+  command = 'set filetype=c',
+})
 --custom keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'l', 'h', { noremap = true, silent = true })
@@ -7,6 +10,7 @@ vim.keymap.set({ 'n', 'v', 'o' }, 'j', 'j', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'k', 'k', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'ö', 'l', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'h', '', { noremap = true, silent = true })
+vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Exit Terminal Mode' })
 --file formatting bcs windows sucks
 vim.opt.fileformats = 'unix,dos'
 vim.opt.fileformat = 'unix'
@@ -435,17 +439,6 @@ require('lazy').setup({
           'snippet_forward',
           'fallback',
         },
-        ['<CR>'] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          'snippet_forward',
-          'fallback',
-        },
         ['<C-Space>'] = { 'show' },
         ['<C-e>'] = { 'hide' },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
@@ -461,7 +454,7 @@ require('lazy').setup({
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
 
       sources = {
