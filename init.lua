@@ -431,9 +431,7 @@ require('lazy').setup({
         ['<C-Space>'] = { 'show' },
         ['<CR>'] = {
           function(cmp)
-            if cmp.snippet_active() and cmp.is_visible() then
-              return cmp.accept_and_enter()
-            else
+            if cmp.is_visible() then
               return cmp.select_and_accept()
             end
           end,
