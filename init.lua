@@ -426,12 +426,20 @@ require('lazy').setup({
     --- @type blink.cmp.Config
     opts = {
       keymap = {
-        ['<C-h>'] = { 'select_next', 'fallback_to_mappings' },
-        ['<C-n>'] = { 'select_prev', 'fallback_to_mappings' },
         ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
         ['<C-Space>'] = { 'show' },
-        ['<C-R>'] = { 'accept' },
+        ['<CR>'] = {
+          function(cmp)
+            if cmp.snippet_active() and cmp.is_visible() then
+              return cmp.accept_and_enter()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
         ['<C-e>'] = { 'hide' },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
