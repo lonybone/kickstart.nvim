@@ -428,17 +428,8 @@ require('lazy').setup({
       keymap = {
         ['<C-h>'] = { 'select_next', 'fallback_to_mappings' },
         ['<C-n>'] = { 'select_prev', 'fallback_to_mappings' },
-        ['<Tab>'] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          'snippet_forward',
-          'fallback',
-        },
+        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
         ['<C-Space>'] = { 'show' },
         ['<C-e>'] = { 'hide' },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
