@@ -1,16 +1,20 @@
---custom commands
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.h',
   command = 'set filetype=c',
 })
 --custom keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Exit Terminal Mode' })
 vim.keymap.set({ 'n', 'v', 'o' }, 'l', 'h', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'j', 'j', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'k', 'k', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'ö', 'l', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'o' }, 'h', '', { noremap = true, silent = true })
-vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Exit Terminal Mode' })
+
+vim.keymap.set({ 'n', 'v', 'o' }, '<leader>d', '"_d', { noremap = true, silent = true })
 --file formatting bcs windows sucks
 vim.opt.fileformats = 'unix,dos'
 vim.opt.fileformat = 'unix'
@@ -18,8 +22,6 @@ vim.opt.fileformat = 'unix'
 vim.opt.number = true
 vim.opt.relativenumber = true
 --kickstarter stuff
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 vim.o.number = true
